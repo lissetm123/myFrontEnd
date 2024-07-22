@@ -36,9 +36,7 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
 
-            fetch('https://node-3g53i5xdq-lissetm123s-projects.vercel.app
-/companyName/Area/api/login', {
-              
+            fetch('https://node-api-ruby-five.vercel.app/companyName/Area/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +51,7 @@
             })
             .then(data => {
                 localStorage.setItem('token', data.token);
-                 errorMessage.textContent = "fetch was ok";
+                errorMessage.textContent = "fetch was ok";
                 // Redirect to another page or update the UI
                 window.location.href = '/dashboard'; // Example redirect
             })
