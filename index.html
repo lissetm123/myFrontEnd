@@ -8,29 +8,56 @@
 </head>
 <body>
     <div class="container">
-        <h1>Industrial Automation Data Transfer</h1>
-        <p>Welcome to the data transfer portal for our iOS app and Node-RED.</p>
-        
+        <h1>Long Island Electro-Mechanical Services LLC</h1>
+        <p>Welcome to the connected devices portal for the world of automations</p>
+        <p>Monitor and control your automation devices and systems with ease and efficiency.</p>
         <!-- Login Form -->
         <form id="login-form">
-            <h2>Login</h2>
             <div>
-                <label for="username">Username:</label>
+                <label for="username">Username :</label>
                 <input type="text" id="username" name="username" required>
             </div>
+            <br>
             <div>
-                <label for="password">Password:</label>
+                <label for="password">Password :</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <br>
             <button type="submit">Login</button>
         </form>
+        <p id="error-message" style="color: red;"></p>
     </div>
 
     <script>
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            // Add login logic here
-            alert('Login function called');
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            fetch('https://node-api-ruby-five.vercel.app//companyName/Area/api/login', {
+              
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Invalid credentials.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                localStorage.setItem('token', data.token);
+                // Redirect to another page or update the UI
+                window.location.href = '/dashboard'; // Example redirect
+            })
+            .catch(error => {
+                errorMessage.textContent = error.message;
+            });
         });
     </script>
 </body>
