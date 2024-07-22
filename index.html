@@ -11,15 +11,32 @@
         <h1>Industrial Automation Data Transfer</h1>
         <p>Welcome to the data transfer portal for our iOS app and Node-RED.</p>
         
-        <!-- Navigation bar -->
-        <nav>
-            <ul>
-                <li><a href="#tank-room">Tank Room</a></li>
-                <li><a href="#devices"  >Devices</a></li>
-            </ul>
-        </nav>
-       
-      
+        <!-- Login or Register Form -->
+        <form id="auth-form">
+            <h2>Login or Register</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Login</button>
+            <button type="button" onclick="register()">Register</button>
+        </form>
     </div>
+
+    <script>
+        function register() {
+            // Add registration logic here
+            alert('Register function called');
+        }
+
+        document.getElementById('auth-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Add login logic here
+            alert('Login function called');
+        });
+    </script>
 </body>
 </html>
+
