@@ -11,27 +11,23 @@
         <h1>Industrial Automation Data Transfer</h1>
         <p>Welcome to the data transfer portal for our iOS app and Node-RED.</p>
         
-        <!-- Login or Register Form -->
-        <form id="auth-form">
-            <h2>Login or Register</h2>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
+        <!-- Login Form -->
+        <form id="login-form">
+            <h2>Login</h2>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
             <button type="submit">Login</button>
-            <button type="button" onclick="register()">Register</button>
         </form>
     </div>
 
     <script>
-        function register() {
-            // Add registration logic here
-            alert('Register function called');
-        }
-
-        document.getElementById('auth-form').addEventListener('submit', function(event) {
+        document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
             // Add login logic here
             alert('Login function called');
@@ -39,4 +35,5 @@
     </script>
 </body>
 </html>
+
 
