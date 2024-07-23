@@ -1,71 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Industrial Automation Data Transfer</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <h1>Long Island Electro-Mechanical Services LLC</h1>
-        <p>Welcome to the connected devices portal for the world of automations</p>
-        <p>Monitor and control your automation devices and systems with ease and efficiency.</p>
-        <!-- Login Form -->
-        <form id="login-form">
-            <div>
-                <label for="username">Username :</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <br>
-            <div>
-                <label for="password">Password :</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <br>
-            <button type="submit">Login</button>
-        </form>
-        <p id="error-message" style="color: red;"></p>
+      <h1>Long Island Electro-Mechanical Services LLC</h1>
+      <p>
+        Welcome to the connected devices portal for the world of automations
+      </p>
+      <p>
+        Monitor and control your automation devices and systems with ease and
+        efficiency.
+      </p>
+      <!-- Login Form -->
+      <form id="login-form">
+        <div>
+          <label for="username">Username :</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <br />
+        <div>
+          <label for="password">Password :</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <br />
+        <button type="submit">Login</button>
+      </form>
+      <p id="error-message" style="color: red"></p>
     </div>
 
     <script>
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const errorMessage = document.getElementById("error-message");
 
-            fetch('https://node-api-ruby-five.vercel.app/companyName/Area/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                                    "username": "admin",
-                                    "password": "password"
-                                    }),
-
-                
+          fetch(
+            "https://node-api-ruby-five.vercel.app/companyName/Area/api/login",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: username,
+                password: password,
+              }),
+            }
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Invalid credentials.");
+              }
+              return response.json();
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Invalid credentials.');
-                }
-                return response.json();
+            .then((data) => {
+              localStorage.setItem("token", data.token);
+              errorMessage.textContent = "fetch was ok";
+              // Redirect to another page or update the UI
+              window.location.href = "/dashboard"; // Example redirect
             })
-            .then(data => {
-                localStorage.setItem('token', data.token);
-                errorMessage.textContent = "fetch was ok";
-                // Redirect to another page or update the UI
-                window.location.href = '/dashboard'; // Example redirect
-            })
-            .catch(error => {
-                errorMessage.textContent = error.message;
+            .catch((error) => {
+              errorMessage.textContent = error.message;
+              console.log(username);
             });
         });
     </script>
-</body>
+  </body>
 </html>
 
 
