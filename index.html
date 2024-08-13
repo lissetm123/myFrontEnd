@@ -34,47 +34,41 @@
     </div>
 
     <script>
-      document
-        .getElementById("login-form")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
+      document.getElementById("login-form").addEventListener("submit", function (event) {
+        event.preventDefault();
 
-          const username = document.getElementById("username").value;
-          const password = document.getElementById("password").value;
-          const errorMessage = document.getElementById("error-message");
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const errorMessage = document.getElementById("error-message");
 
-          fetch(
-            "https://node-api-ruby-five.vercel.app/companyName/Area/api/login",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                username: username,
-                password: password,
-              }),
-            }
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Invalid credentials.");
-              }
-              return response.json();
-            })
-            .then((data) => {
-              localStorage.setItem("token", data.token);
-              errorMessage.textContent = "fetch was ok";
-              // Redirect to another page or update the UI
-             window.location.href = "tank.html";
-            })
-            .catch((error) => {
-              errorMessage.textContent = error.message;
-              console.log(username);
-            });
+        fetch("https://node-api-ruby-five.vercel.app/companyName/Area/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Invalid credentials.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          localStorage.setItem("token", data.token);
+          errorMessage.textContent = "";  // Clear any previous error message
+          
+          // Redirect to tank.html after successful login
+          window.location.href = "tank.html";
+        })
+        .catch((error) => {
+          errorMessage.textContent = error.message;
+          console.log(error);
         });
+      });
     </script>
   </body>
 </html>
-
-
