@@ -3856,8 +3856,8 @@
       .then((data) => {
         // Handle the response data
         console.log("Fetched data:", data);
-        dataReceived = data;
-        updateValues();
+        //dataReceived = data;
+        updateValues(data);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -3870,10 +3870,10 @@
       });
   }
 
-  function updateValues() {
+  function updateValues(data) {
     // Ensure that dataReceived is properly used
-    let pump1 = dataReceived.pump1 || {};
-    let pump2 = dataReceived.pump2 || {};
+    let pump1 = data.pump1 || {};
+    let pump2 = data.pump2 || {};
 
     // Update pump 1 values
     document.getElementById("tspan34").innerText = pump1.status || '';
