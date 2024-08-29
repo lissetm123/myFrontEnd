@@ -3757,91 +3757,97 @@
  
 
   </div>
+  
+<script>
+  window.onload = function () {
+    let token = localStorage.getItem('token');
+    console.log(token);
 
-  <script>
-    window.onload = function () {
-      let token = localStorage.getItem('token');
+    // Ensure necessary elements exist
+    let commBar = document.getElementById("comm_bar");
+    if (!commBar) {
+      console.error("Comm bar element not found.");
+      return;
+    }
 
-      if (token) {
-        // Define the URL for data fetch
-        const dataUrl = "https://node-api-ruby-five.vercel.app/companyName/Area/api/data";
+    if (token) {
+      // Define the URL for data fetch
+      const dataUrl = "https://node-api-ruby-five.vercel.app/companyName/Area/api/data";
 
-        // If data collection is already in progress, clear the interval first
+      // Initialize variables
+      let dataInterval = null;
+      let dataReceived = {};
+
+      // If data collection is already in progress, clear the interval first
+      if (dataInterval) {
+        clearInterval(dataInterval);
+      }
+
+      // Set up the interval to fetch data every 5 seconds
+      dataInterval = setInterval(() => {
+        fetchDataWithToken(token, dataUrl, dataInterval);
+      }, 5000);
+
+      console.log("Page is fully loaded");
+    } else {
+      console.error("No token found. Please log in.");
+      // Provide feedback to the user
+      commBar.classList.add("no_comm");
+    }
+  };
+
+  function fetchDataWithToken(token, dataUrl, dataInterval) {
+    fetch(dataUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`  // Adjusted to the expected format
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok: " + response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Handle the response data
+        console.log("Fetched data:", data);
+        dataReceived = data;
+        updateValues();
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+        // Provide feedback to the user
+        document.getElementById("comm_bar").classList.add("no_comm");
+        // Clear the interval to stop fetching data if an error occurs
         if (dataInterval) {
           clearInterval(dataInterval);
         }
+      });
+  }
 
-        // Set up the interval to fetch data every 5 seconds
-        dataInterval = setInterval(() => {
-          fetchDataWithToken(token);
-        }, 5000);
+  function updateValues() {
+    // Ensure that dataReceived is properly used
+    let pump1 = dataReceived.pump1 || {};
+    let pump2 = dataReceived.pump2 || {};
 
-        console.log("Page is fully loaded");
-      } else {
-        console.error("No token found. Please log in.");
-        // Optionally provide feedback to the user
-        document.getElementById("comm_bar").classList.add("no_comm");
-      }
-    };
+    // Update pump 1 values
+    document.getElementById("tspan34")?.innerText = pump1.status || '';
+    document.getElementById("tspan35")?.innerText = (pump1.current || 0).toFixed(2);
+    document.getElementById("tspan36")?.innerText = (pump1.speed || 0).toFixed(2);
+    document.getElementById("tspan37")?.innerText = (pump1.power || 0).toFixed(2);
 
-    let level = document.getElementById("tank_level");
-    let commBar = document.getElementById("comm_bar");
-    let dataInterval = null;
-    let dataReceived = {};
+    // Update pump 2 values
+    document.getElementById("tspan43")?.innerText = pump2.status || '';
+    document.getElementById("tspan44")?.innerText = (pump2.current || 0).toFixed(2);
+    document.getElementById("tspan45")?.innerText = (pump2.speed || 0).toFixed(2);
+    document.getElementById("tspan46")?.innerText = (pump2.power || 0).toFixed(2);
 
-    function fetchDataWithToken(token) {
-      const dataUrl = "https://node-api-ruby-five.vercel.app/companyName/Area/api/data";
+    // Update comm bar
+    document.getElementById("comm_bar").classList.remove("no_comm");
+    document.getElementById("comm_bar").classList.add("yes_comm");
+  }
+</script>
 
-      fetch(dataUrl, {
-        method: "GET",
-        headers: {
-          Authorization: token 
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok: " + response.statusText);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Handle the response data
-          console.log("Fetched data:", data);
-          dataReceived = data;
-          updateValues();
-        })
-        .catch((error) => {
-          console.error("There was a problem with the fetch operation:", error);
-          // Optionally provide feedback to the user
-          document.getElementById("comm_bar").classList.add("no_comm");
-          // Clear the interval to stop fetching data if an error occurs
-          if (dataInterval) {
-            clearInterval(dataInterval);
-          }
-        });
-    }
-
-    function updateValues() {
-      // Example of updating values, assuming dataReceived is correctly populated
-      let pump1 = dataReceived.pump1 || {};
-      let pump2 = dataReceived.pump2 || {};
-
-      // Update pump 1 values
-      document.getElementById("tspan34").innerText = pump1.status || '';
-      document.getElementById("tspan35").innerText = (pump1.current || 0).toFixed(2);
-      document.getElementById("tspan36").innerText = (pump1.speed || 0).toFixed(2);
-      document.getElementById("tspan37").innerText = (pump1.power || 0).toFixed(2);
-
-      // Update pump 2 values
-      document.getElementById("tspan43").innerText = pump2.status || '';
-      document.getElementById("tspan44").innerText = (pump2.current || 0).toFixed(2);
-      document.getElementById("tspan45").innerText = (pump2.speed || 0).toFixed(2);
-      document.getElementById("tspan46").innerText = (pump2.power || 0).toFixed(2);
-
-      // Update comm bar
-      commBar.classList.remove("no_comm");
-      commBar.classList.add("yes_comm");
-    }
-  </script>
 </body>
 </html>
