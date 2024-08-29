@@ -3827,32 +3827,11 @@
       let dataReceived = {};
 
       window.onload = function () {
-        // Define the URL and payload for token fetch
+        // Define the URL and payload for data fetch
         const tokenUrl =
           "https://node-api-ruby-five.vercel.app/companyName/Area/api/login";
-        const payload = {
-          username: "admin",
-          password: "password",
-        };
-
-        // Send the POST request to fetch the token
-        fetch(tokenUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-              commBar.classList.add("no_comm");
-              commBar.classList.remove("yes_comm");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            token = data.token;
+         const token = localStorage.getItem('token');
+         
 
             // If data collection is already in progress, clear the interval first
             if (dataInterval) {
@@ -3864,12 +3843,7 @@
               fetchDataWithToken(token);
             }, 5000);
           })
-          .catch((error) => {
-            console.error(
-              "There was a problem with the fetch operation:",
-              error
-            );
-          });
+         
 
         console.log("Page is fully loaded");
       };
