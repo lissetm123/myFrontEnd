@@ -3843,7 +3843,8 @@
     fetch(dataUrl, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`  // Adjusted to the expected format
+       // Authorization: `Bearer ${token}`  // Adjusted to the expected format
+         Authorization: token
       },
     })
       .then((response) => {
