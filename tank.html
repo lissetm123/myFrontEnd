@@ -3832,16 +3832,16 @@
     let pump2 = dataReceived.pump2 || {};
 
     // Update pump 1 values
-    document.getElementById("tspan34")?.innerText = pump1.status || '';
-    document.getElementById("tspan35")?.innerText = (pump1.current || 0).toFixed(2);
-    document.getElementById("tspan36")?.innerText = (pump1.speed || 0).toFixed(2);
-    document.getElementById("tspan37")?.innerText = (pump1.power || 0).toFixed(2);
+    document.getElementById("tspan34").innerText = pump1.status || '';
+    document.getElementById("tspan35").innerText = (pump1.current || 0).toFixed(2);
+    document.getElementById("tspan36").innerText = (pump1.speed || 0).toFixed(2);
+    document.getElementById("tspan37").innerText = (pump1.power || 0).toFixed(2);
 
     // Update pump 2 values
-    document.getElementById("tspan43")?.innerText = pump2.status || '';
-    document.getElementById("tspan44")?.innerText = (pump2.current || 0).toFixed(2);
-    document.getElementById("tspan45")?.innerText = (pump2.speed || 0).toFixed(2);
-    document.getElementById("tspan46")?.innerText = (pump2.power || 0).toFixed(2);
+    document.getElementById("tspan43").innerText = pump2.status || '';
+    document.getElementById("tspan44").innerText = (pump2.current || 0).toFixed(2);
+    document.getElementById("tspan45").innerText = (pump2.speed || 0).toFixed(2);
+    document.getElementById("tspan46").innerText = (pump2.power || 0).toFixed(2);
 
     // Update comm bar
     document.getElementById("comm_bar").classList.remove("no_comm");
