@@ -4736,21 +4736,22 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
     </div>
    
 
+
    <script>
   let level = document.getElementById("tank_level");
   let cutout = document.getElementById("tank_cutout");
   let maxHeight = cutout.getAttribute("height");
   let commBar = document.getElementById("comm_bar");
 
-  let pump1_status_txt = document.getElementById("tspan34");
-  let pump1_speed_txt = document.getElementById("tspan35");
-  let pump1_current_txt = document.getElementById("tspan36");
-  let pump1_power_txt = document.getElementById("tspan37");
+  let pump1_status_txt = document.getElementById("tspan1");
+  let pump1_current_txt = document.getElementById("tspan3");
+  let pump1_rpm_txt = document.getElementById("tspan5");
+  let pump1_psi_txt = document.getElementById("tspan7");
 
-  let pump2_status_txt = document.getElementById("tspan43");
-  let pump2_speed_txt = document.getElementById("tspan44");
-  let pump2_current_txt = document.getElementById("tspan45");
-  let pump2_power_txt = document.getElementById("tspan46");
+  let pump2_status_txt = document.getElementById("tspan11");
+  let pump2_current_txt = document.getElementById("tspan13");
+  let pump2_rpm_txt = document.getElementById("tspan15");
+  let pump2_psi_txt = document.getElementById("tspan17");
 
   let token = null;
   let dataInterval = null;
@@ -4819,14 +4820,14 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
     let pump2 = data.pump2;
 
     pump1_status_txt.innerHTML = pump1.status;
-    pump1_speed_txt.innerHTML = pump1.current.toFixed(2);
-    pump1_current_txt.innerHTML = pump1.speed.toFixed(2);
-    pump1_power_txt.innerHTML = pump1.power.toFixed(2);
+    pump1_current_txt.innerHTML = pump1.current.toFixed(2);
+    pump1_rpm_txt.innerHTML = pump1.rpm.toFixed(2);
+    pump1_psi_txt.innerHTML = pump1.ps1.toFixed(2);
 
     pump2_status_txt.innerHTML = pump2.status;
-    pump2_speed_txt.innerHTML = pump2.current.toFixed(2);
-    pump2_current_txt.innerHTML = pump2.speed.toFixed(2);
-    pump2_power_txt.innerHTML = pump2.power.toFixed(2);
+    pump2_current_txt.innerHTML = pump2.current.toFixed(2);
+    pump2_rpm_txt.innerHTML = pump2.rpm.toFixed(2);
+    pump2_psi_txt.innerHTML = pump2.ps1.toFixed(2);
 
     console.log(dataReceived);
 
