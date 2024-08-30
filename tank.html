@@ -4752,6 +4752,9 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
   let pump2_rpm_txt = document.getElementById("tspan33");
   let pump2_psi_txt = document.getElementById("tspan35");
 
+   let tank_volume_txt = document.getElementById("tspan27");
+     
+
   let token = null;
   let dataInterval = null;
   let dataReceived = {};
@@ -4817,6 +4820,7 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
 
     let pump1 = data.pump1;
     let pump2 = data.pump2;
+    let tank = data.tank;
 
     pump1_status_txt.innerHTML = pump1.status;
     pump1_current_txt.innerHTML = pump1.current;
@@ -4827,6 +4831,10 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
     pump2_current_txt.innerHTML = pump2.current;
     pump2_rpm_txt.innerHTML = pump2.rpm;
     pump2_psi_txt.innerHTML = pump2.psi;
+
+     tank_volume_txt.innerHTML = tank.volume;
+
+   
 
     console.log(dataReceived);
 
