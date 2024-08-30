@@ -4814,14 +4814,16 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
   }
 
   function updateValues(data) {
-    let randomLevel = Math.random() * maxHeight; // Generate a random height between 0 and maxheight
+   
 
-    level.style.height = randomLevel + "px"; // Set the height in pixels
+   
 
     let pump1 = data.pump1;
     let pump2 = data.pump2;
     let tank = data.tank;
-
+    let randomLevel = tank.percent * maxHeight; // Generate a random height between 0 and maxheight
+    level.style.height = randomLevel + "px"; // Set the height in pixels 
+    
     pump1_status_txt.innerHTML = pump1.status;
     pump1_current_txt.innerHTML = pump1.current;
     pump1_rpm_txt.innerHTML = pump1.rpm;
