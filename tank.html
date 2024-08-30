@@ -4821,7 +4821,7 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
     let pump1 = data.pump1;
     let pump2 = data.pump2;
     let tank = data.tank;
-    let randomLevel = tank.percent * maxHeight; // Generate a random height between 0 and maxheight
+    let randomLevel = (1-tank.percent) * maxHeight; // Generate a random height between 0 and maxheight
     level.style.height = randomLevel + "px"; // Set the height in pixels 
     
     pump1_status_txt.innerHTML = pump1.status;
