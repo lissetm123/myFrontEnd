@@ -4835,13 +4835,13 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
     pump2_rpm_txt.innerHTML = pump2.rpm;
     pump2_psi_txt.innerHTML = pump2.psi;
 
-     if (pump1.status = "running") {
+     if (pump1.status === "running") {
           document.getElementById("pump1-off").style.display = "none";
         } else {
           document.getElementById("pump1-off").style.display = "block";
         }
 
-        if (pump2.status = "running") {
+        if (pump2.status === "running") {
           document.getElementById("pump2-off").style.display = "none";
         } else {
           document.getElementById("pump2-off").style.display = "block";
