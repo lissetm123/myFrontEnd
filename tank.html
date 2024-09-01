@@ -37,12 +37,12 @@
         background-color: #a19d86;
       } 
 
-      .status_container {
+      #status_container {
         width: 100%;
         height: 100%;
         margin: 0px;
         padding: 0px;
-        background-color: #9ec4e6;
+        background-color: #f1c3c3;
         border-radius: 10px;
         box-shadow: 0px 4px 10px rgba(10, 31, 4, 0.1);
         margin-bottom: 20px;
@@ -56,7 +56,7 @@
   </head>
   <body>
 
-    <div class="status_container">
+    <div id="status_container">
         <div id="comm_bar" class="no_comm">''</div>
 
  
@@ -4753,7 +4753,7 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
   let pump2_psi_txt = document.getElementById("tspan35");
 
    let tank_volume_txt = document.getElementById("tspan27");
-     
+    let container = document.getElementById("status_container"); 
 
   let token = null;
   let dataInterval = null;
@@ -4794,6 +4794,7 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
     })
       .then((response) => {
         if (!response.ok) {
+          container.style.backgroundColor = "#f1c3c3";
           throw new Error("Network response was not ok");
         }
         return response.json();
@@ -4842,6 +4843,7 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
 
     commBar.classList.remove("no_comm");
     commBar.classList.add("yes_comm");
+     container.style.backgroundColor = "#bdd6ac";
   }
 </script>
 
