@@ -61,9 +61,8 @@
           localStorage.setItem("token", data.token);
           errorMessage.textContent = "";  // Clear any previous error message
           
-          // Redirect to tank.html after successful login
-         // window.location.href = "tank.html";
-          window.location.href = "https://nodered.longislandelectromechanical.cc/dashboard/home";
+          // Redirect to the URL received in the response
+          window.location.href = data.url; // Use the URL from the response
         })
         .catch((error) => {
           errorMessage.textContent = error.message;
